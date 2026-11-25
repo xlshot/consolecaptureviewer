@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' blob: mediastream:; img-src 'self' data: blob:;">
+<title>Console Capture Viewer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<video id="video" autoplay playsinline muted></video>
+
+<div id="empty" class="empty">
+  <h1>Console Capture Viewer</h1>
+  <p id="emptyMsg">Plug in your capture card, then pick it below and press <b>Start</b>.</p>
+  <p class="hint">Connect console → capture card (HDMI IN) → PC (USB). Console picture should show up here.</p>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div id="panel" class="panel">
+  <div class="row">
+    <label>Video
+      <select id="videoSel"></select>
+    </label>
+    <label>Audio
+      <select id="audioSel"></select>
+    </label>
+    <label>Sound output
+      <select id="outSel"></select>
+    </label>
+    <label>Quality
+      <select id="resSel">
+        <option value="auto">Auto (card default)</option>
+      </select>
+    </label>
+    <label>Fit
+      <select id="fitSel">
+        <option value="contain">Fit (keep ratio)</option>
+        <option value="cover">Fill (crop)</option>
+        <option value="fill">Stretch</option>
+      </select>
+    </label>
+  </div>
+  <div class="row">
+    <button id="startBtn" class="primary">Start</button>
+    <button id="refreshBtn" title="Rescan devices">Refresh</button>
+    <button id="muteBtn" title="Mute (M)">🔊</button>
+    <input id="vol" type="range" min="0" max="1" step="0.01" value="1" title="Volume">
+    <button id="shotBtn" title="Screenshot (S)">📷</button>
+    <button id="recBtn" title="Record (R)">⏺ Rec</button>
+    <button id="topBtn" title="Always on top (T)">📌</button>
+    <button id="fsBtn" title="Fullscreen (F11 / F)">⛶</button>
+    <span id="stats" class="stats"></span>
+  </div>
+  <div class="keys">F11 / F fullscreen · M mute · S screenshot · R record · H hide panel · Esc exit fullscreen</div>
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>
