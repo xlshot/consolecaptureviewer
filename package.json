@@ -1,7 +1,7 @@
 {
   "name": "console-capture-viewer",
   "productName": "Console Capture Viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Play your console on your PC using a USB capture card.",
   "main": "src/main.js",
   "author": "Console Capture Viewer",

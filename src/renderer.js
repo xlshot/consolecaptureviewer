@@ -89,7 +89,7 @@ const CANDIDATES = [
   [3840, 2160], [2560, 1440], [1920, 1080], [1600, 900], [1280, 720],
   [1024, 768], [800, 600], [720, 576], [720, 480], [640, 480]
 ];
-const FPS_LIST = [120, 60, 50, 30, 25, 24, 15];
+const FPS_LIST = [60, 30];
 let probing = false;
 
 // Ask the card which modes it really supports by trying each one on a live track.
@@ -108,21 +108,38 @@ async function probeModes() {
     const t = s.getVideoTracks()[0];
     for (const [w, h] of CANDIDATES) {
       for (const f of FPS_LIST) {
+        let ok = false;
+        const matches = () => {
+          const g = t.getSettings();
+          return g.width === w && g.height === h && Math.abs((g.frameRate || f) - f) <= 1;
+        };
         try {
           await t.applyConstraints({ width: { exact: w }, height: { exact: h }, frameRate: { exact: f } });
-          const g = t.getSettings();
-          if (g.width === w && g.height === h && Math.abs((g.frameRate || f) - f) <= 1) found.push([w, h, f]);
-        } catch { /* mode not supported */ }
+          ok = matches();
+        } catch { /* exact not accepted */ }
+        if (!ok) {
+          // Some drivers reject 'exact' but honor a close request.
+          try {
+            await t.applyConstraints({ width: { ideal: w }, height: { ideal: h }, frameRate: { ideal: f } });
+            ok = matches();
+          } catch { /* mode not supported */ }
+        }
+        if (ok) found.push([w, h, f]);
       }
     }
   } catch { /* card busy or missing */ }
   if (s) s.getTracks().forEach((t) => t.stop());
   sel.innerHTML = '';
   sel.add(new Option('Auto (card default)', 'auto'));
+  if (!found.length) {
+    // Scan found nothing usable: offer common modes to try; the readout shows what the card really gives.
+    [[1920, 1080, 60], [1920, 1080, 30], [1280, 720, 60], [1280, 720, 30], [3840, 2160, 30]]
+      .forEach(([w, h, f]) => found.push([w, h, f]));
+  }
   found.forEach(([w, h, f]) => sel.add(new Option(`${h}p ${f}${w === 1920 || w === 1280 || w === 3840 ? '' : ` (${w}×${h})`}`, `${w}x${h}@${f}`)));
   const has = (v) => [...sel.options].some((o) => o.value === v);
   const pref = ['1920x1080@30', '1280x720@30'];
-  sel.value = has(saved) ? saved : (pref.find(has) || 'auto');
+  sel.value = saved !== 'auto' && has(saved) ? saved : (pref.find(has) || 'auto');
   probing = false;
   persist();
 }
