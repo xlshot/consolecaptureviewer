@@ -31,9 +31,9 @@ Console  --HDMI-->  Capture card  --USB-->  Windows PC  (Console Capture Viewer)
 ## Install
 
 1. Go to the [Releases](../../releases) page.
-2. Download **Console Capture Viewer Setup** (the installer) and run it. This is the recommended choice: it adds shortcuts and keeps itself up to date.
+2. Download **Console-Capture-Viewer-Setup.exe** (the installer) and run it. This is the recommended choice: it adds shortcuts and keeps itself up to date.
 
-Prefer not to install anything? Download **Console Capture Viewer Portable** instead. It's a single `.exe` that runs from anywhere, such as a USB stick, but it doesn't update itself.
+Prefer not to install anything? Download **Console-Capture-Viewer-Portable.exe** instead. It's a single `.exe` that runs from anywhere, such as a USB stick, but it doesn't update itself.
 
 The installed version checks GitHub for new versions when it starts, downloads them in the background, and offers a **Restart to update** button. You can also press **Updates** in the control bar to check manually. (The portable version doesn't update itself.)
 

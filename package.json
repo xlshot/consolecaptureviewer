@@ -31,7 +31,8 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "artifactName": "Console-Capture-Viewer-Setup.${ext}"
     },
     "publish": [
       {
@@ -41,7 +42,7 @@
       }
     ],
     "portable": {
-      "artifactName": "${productName} Portable ${version}.${ext}"
+      "artifactName": "Console-Capture-Viewer-Portable.${ext}"
     }
   },
   "devDependencies": {
