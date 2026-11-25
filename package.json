@@ -39,7 +39,10 @@
         "owner": "xlshot",
         "repo": "consolecaptureviewer"
       }
-    ]
+    ],
+    "portable": {
+      "artifactName": "${productName} Portable ${version}.${ext}"
+    }
   },
   "devDependencies": {
     "electron": "^33.2.0",
