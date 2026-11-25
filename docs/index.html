@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Console Capture Viewer – play your console on your laptop</title>
+<meta name="description" content="Free Windows app that turns a USB capture card into a console viewer. Play your Xbox, PlayStation or Switch on your laptop with sound, no TV needed.">
+<style>
+:root{--bg:#0e0d14;--card:#171622;--line:#2a2840;--text:#ecebf5;--mute:#a09fb8;--accent:#ff4fa3;--accent2:#00d4ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 system-ui,Segoe UI,Roboto,sans-serif}
+a{color:var(--accent2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+header.hero{padding:70px 0 30px;text-align:center;background:radial-gradient(900px 400px at 50% -10%,#3b1b66 0,transparent 70%)}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.1;margin:0 0 14px;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:660px;margin:0 auto 26px;color:var(--mute);font-size:19px}
+.btn{display:inline-block;padding:14px 26px;border-radius:12px;font-weight:600;text-decoration:none;margin:4px}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#ff7a59);color:#fff}
+.btn.ghost{border:1px solid var(--line);color:var(--text);background:var(--card)}
+.small{color:var(--mute);font-size:14px}
+.shot{display:block;width:100%;border-radius:14px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.55)}
+.hero .shot{margin-top:38px}
+section{padding:56px 0}
+h2{font-size:clamp(26px,4vw,36px);margin:0 0 10px;letter-spacing:-.01em}
+.sub{color:var(--mute);margin:0 0 30px;max-width:680px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;counter-increment:s}
+.step:before{content:counter(s);display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;margin-bottom:10px}
+.step b{display:block;margin-bottom:4px}
+.step p{margin:0;color:var(--mute);font-size:15px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:26px 0 0;color:var(--mute);font-size:15px}
+.flow i{font-style:normal;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--text)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+.split.rev .txt{order:2}
+@media(max-width:760px){.split{grid-template-columns:1fr}.split.rev .txt{order:0}}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.f{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.f b{display:block;margin-bottom:4px}
+.f p{margin:0;color:var(--mute);font-size:15px}
+.kbd{display:inline-block;border:1px solid var(--line);border-bottom-width:3px;border-radius:7px;padding:0 8px;font-size:14px;background:var(--card);margin:2px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--mute);margin:10px 0 0}
+.cta{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:42px 22px}
+footer{padding:36px 0 60px;text-align:center;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Play your console<br><span>on your laptop</span></h1>
+    <p class="lead">No TV? No problem. Plug a USB capture card into your Windows PC, open Console Capture Viewer, and play your Xbox, PlayStation, or Switch right on your laptop screen, with sound.</p>
+    <a class="btn primary" href="https://github.com/xlshot/consolecaptureviewer/releases/latest/download/Console-Capture-Viewer-Setup.exe">Download for Windows</a>
+    <a class="btn ghost" href="#how">How it works</a>
+    <p class="small">Free · Windows 10 and 11 · Open source · <a href="https://github.com/xlshot/consolecaptureviewer/releases/latest">Portable version and all downloads</a></p>
+    <img class="shot" src="img/setup-photo.jpg" alt="A gamer playing an Xbox on a laptop through a USB capture card" loading="eager">
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <h2>Up and running in a minute</h2>
+    <p class="sub">All you need is a USB capture card (the small HDMI to USB dongles work great), an HDMI cable, and your laptop.</p>
+    <div class="steps">
+      <div class="step"><b>Plug it in</b><p>Console HDMI out to the capture card's HDMI IN. Card into a USB port on your laptop.</p></div>
+      <div class="step"><b>Open the app</b><p>It finds your capture card on its own. Pick it from the Video menu if you have more than one.</p></div>
+      <div class="step"><b>Press Start</b><p>Your game appears, and the sound plays through your laptop speakers or headphones.</p></div>
+    </div>
+    <div class="flow"><i>Console</i> → HDMI → <i>Capture card</i> → USB → <i>Your laptop</i></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The app</h2>
+    <p class="sub">Simple and out of the way: your game, with one control bar that hides while you play.</p>
+    <img class="shot" src="img/app-playing.png" alt="Console Capture Viewer showing a racing game full window with the control bar along the bottom" loading="lazy">
+    <p class="small" style="text-align:center">App screenshots use original demo footage.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="txt">
+      <h2>Fullscreen, no clutter</h2>
+      <p class="sub">Press <span class="kbd">F11</span> or double-click the picture. The controls and the mouse cursor fade out after a few seconds so it's just you and the game. Move the mouse and they come right back.</p>
+    </div>
+    <img class="shot" src="img/app-fullscreen.png" alt="The game filling the whole window with the controls hidden" loading="lazy">
+  </div>
+</section>
+
+<section>
+  <div class="wrap split rev">
+    <div class="txt">
+      <h2>Everything in one bar</h2>
+      <p class="sub">Choose your card, pick where the sound plays, set the quality, and go. The app tests your card and shows only the resolutions and frame rates it really supports, up to 1080p60 or 4K on cards that can do it.</p>
+    </div>
+    <img class="shot" src="img/app-controls.png" alt="Close-up of the control bar with video, audio, sound output, quality and fit menus" loading="lazy">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What you can do</h2>
+    <p class="sub">Simple on purpose: no accounts, no stream setup, no scenes.</p>
+    <div class="feat">
+      <div class="f"><b>Game sound on your laptop</b><p>Plays the console's audio through your speakers or headset. Pick any output you like.</p></div>
+      <div class="f"><b>Screenshots</b><p>Press <span class="kbd">S</span> to save a PNG of the moment.</p></div>
+      <div class="f"><b>Record gameplay</b><p>Press <span class="kbd">R</span> to start and stop recording, saved as a video file.</p></div>
+      <div class="f"><b>Always on top</b><p>Pin a small window next to your browser or chat while you play.</p></div>
+      <div class="f"><b>Remembers your setup</b><p>Opens straight to your card with your last settings.</p></div>
+      <div class="f"><b>Updates itself</b><p>The installed version checks for new releases and offers a one-click restart.</p></div>
+    </div>
+    <p class="small" style="margin-top:18px">Shortcuts: <span class="kbd">F</span> fullscreen · <span class="kbd">M</span> mute · <span class="kbd">S</span> screenshot · <span class="kbd">R</span> record · <span class="kbd">T</span> on top · <span class="kbd">H</span> hide controls</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="txt">
+      <h2>Friendly when nothing's plugged in</h2>
+      <p class="sub">If it can't find a card, the app tells you what to do. Plug one in and it picks it up automatically, even while the app is open.</p>
+    </div>
+    <img class="shot" src="img/app-start.png" alt="The start screen asking you to plug in a capture card" loading="lazy">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Good to know</h2>
+    <details><summary>What capture cards work?</summary><p>Any card that shows up in Windows as a USB camera (UVC). That includes most low-cost HDMI to USB and USB-C capture dongles, plus many Elgato, AVerMedia and similar cards. They need no driver.</p></details>
+    <details><summary>I only see a black screen</summary><p>Consoles like PS5, Xbox and Switch can turn on HDMI copy protection (HDCP), which blocks capture cards. Turn HDCP off in the console's settings. Also make sure the console's HDMI cable goes into the card's <b>input</b>, and try a 1080p console output.</p></details>
+    <details><summary>Is there any delay?</summary><p>A small one. USB capture always adds a little. It's great for casual play, story games and party games; fast competitive shooters will feel it more.</p></details>
+    <details><summary>"Windows protected your PC" warning</summary><p>The app isn't code-signed yet, so Windows and your browser may warn about it, like they do for any new unsigned program. The full source is public so you can see exactly what it does. Choose <b>More info</b> then <b>Run anyway</b>, or in your browser's downloads choose <b>Keep</b>.</p></details>
+    <details><summary>Only one app can use my card at a time</summary><p>If it says it couldn't open the card, close OBS, Elgato software or any camera app and press Start again.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Ready to play?</h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto">Download the installer, plug in your card, press Start.</p>
+      <a class="btn primary" href="https://github.com/xlshot/consolecaptureviewer/releases/latest/download/Console-Capture-Viewer-Setup.exe">Download for Windows</a>
+      <a class="btn ghost" href="https://github.com/xlshot/consolecaptureviewer">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Console Capture Viewer is free and open source. Xbox, PlayStation, Switch and other names are trademarks of their owners; this project isn't affiliated with or endorsed by any console maker or capture card brand. Use it only with content you're allowed to capture.</div>
+</footer>
+
+</body>
+</html>
