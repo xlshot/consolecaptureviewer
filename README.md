@@ -33,6 +33,8 @@ Console  --HDMI-->  Capture card  --USB-->  Windows PC  (Console Capture Viewer)
 1. Go to the [Releases](../../releases) page and download the latest installer (`.exe`).
 2. Run it and follow the steps.
 
+The installed version checks GitHub for new versions when it starts, downloads them in the background, and offers a **Restart to update** button. You can also press **Updates** in the control bar to check manually. (The portable build doesn't update itself.)
+
 Windows may show a "Windows protected your PC" (SmartScreen) message because the app is not code-signed. Choose **More info**, then **Run anyway**.
 
 ## Use it

@@ -6,5 +6,8 @@ contextBridge.exposeInMainWorld('api', {
   onFullscreen: (cb) => ipcRenderer.on('fullscreen', (_e, v) => cb(v)),
   saveFile: (opts) => ipcRenderer.invoke('save-file', opts),
   loadSettings: () => ipcRenderer.invoke('load-settings'),
+  appVersion: () => ipcRenderer.invoke('app-version'),
+  checkUpdates: () => ipcRenderer.invoke('check-updates'),
+  onUpdate: (cb) => ipcRenderer.on('update-status', (_e, v) => cb(v)),
   saveSettings: (s) => ipcRenderer.invoke('save-settings', s)
 });

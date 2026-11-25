@@ -8,7 +8,10 @@ app.commandLine.appendSwitch('disable-background-timer-throttling');
 app.commandLine.appendSwitch('enable-features', 'WebRtcHideLocalIpsWithMdns');
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 
+let autoUpdater = null;
+try { ({ autoUpdater } = require('electron-updater')); } catch { autoUpdater = null; }
 let win;
+let updateReady = false;
 let blockerId = null;
 
 function createWindow() {
@@ -46,6 +49,7 @@ app.whenReady().then(() => {
   blockerId = powerSaveBlocker.start('prevent-display-sleep');
 
   createWindow();
+  setupUpdates();
   app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
 });
 
@@ -74,4 +78,30 @@ ipcMain.handle('load-settings', () => {
 });
 ipcMain.handle('save-settings', (_e, s) => {
   try { fs.writeFileSync(settingsFile(), JSON.stringify(s, null, 2)); } catch {}
+});
+
+// ---- Updates (installed builds only; the portable .exe can't self-update) ----
+const sendUpdate = (state, text) => { if (win && !win.isDestroyed()) win.webContents.send('update-status', { state, text }); };
+
+function setupUpdates() {
+  const canUpdate = autoUpdater && app.isPackaged && !process.env.PORTABLE_EXECUTABLE_FILE;
+  if (!canUpdate) return;
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+  autoUpdater.on('checking-for-update', () => sendUpdate('checking', 'Checking for updates…'));
+  autoUpdater.on('update-available', (i) => sendUpdate('downloading', `Downloading update ${i.version}…`));
+  autoUpdater.on('update-not-available', () => sendUpdate('none', `You're up to date (v${app.getVersion()})`));
+  autoUpdater.on('error', () => sendUpdate('error', "Couldn't check for updates"));
+  autoUpdater.on('update-downloaded', (i) => { updateReady = true; sendUpdate('ready', `Update ${i.version} ready. Restart to install`); });
+  setTimeout(() => autoUpdater.checkForUpdates().catch(() => {}), 5000);
+}
+
+ipcMain.handle('app-version', () => ({ version: app.getVersion(), canUpdate: !!(autoUpdater && app.isPackaged && !process.env.PORTABLE_EXECUTABLE_FILE) }));
+ipcMain.handle('check-updates', async () => {
+  if (updateReady) { autoUpdater.quitAndInstall(); return; }
+  if (!autoUpdater || !app.isPackaged || process.env.PORTABLE_EXECUTABLE_FILE) {
+    sendUpdate('error', 'Updates need the installed version. Download the latest from GitHub Releases.');
+    return;
+  }
+  try { await autoUpdater.checkForUpdates(); } catch { sendUpdate('error', "Couldn't check for updates"); }
 });

@@ -300,6 +300,14 @@ async function init() {
   $('fsBtn').onclick = () => window.api.toggleFullscreen();
   video.ondblclick = () => window.api.toggleFullscreen();
 
+  const info = await window.api.appVersion();
+  $('updBtn').title = `Check for updates (v${info.version})`;
+  $('updBtn').onclick = () => window.api.checkUpdates();
+  window.api.onUpdate(({ state, text }) => {
+    say(text, state === 'ready' || state === 'error' ? 6000 : 3000);
+    if (state === 'ready') { $('updBtn').textContent = 'Restart to update'; $('updBtn').classList.add('primary'); }
+  });
+
   navigator.mediaDevices.addEventListener('devicechange', async () => {
     await listDevices();
     await probeModes();
