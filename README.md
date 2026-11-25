@@ -35,7 +35,16 @@ Console  --HDMI-->  Capture card  --USB-->  Windows PC  (Console Capture Viewer)
 
 The installed version checks GitHub for new versions when it starts, downloads them in the background, and offers a **Restart to update** button. You can also press **Updates** in the control bar to check manually. (The portable build doesn't update itself.)
 
-Windows may show a "Windows protected your PC" (SmartScreen) message because the app is not code-signed. Choose **More info**, then **Run anyway**.
+### "Windows protected your PC" or "dangerous file" warnings
+
+Console Capture Viewer isn't code-signed yet (signing certificates cost money), so Windows and your browser may warn about it. This happens with any new unsigned program and doesn't mean the file is unsafe. The full source is in this repo and the installer is built by the public GitHub workflow, so you can check exactly what you're getting.
+
+To continue:
+
+- **Edge:** in Downloads, click **...** next to the file, choose **Keep**, then **Show more**, then **Keep anyway**.
+- **Chrome:** click the warning in the download bar and choose **Keep**.
+- **Windows SmartScreen when you run it:** choose **More info**, then **Run anyway**.
+- **If you downloaded a `.zip`:** right-click it, open **Properties**, tick **Unblock**, apply, and then unzip.
 
 ## Use it
 
